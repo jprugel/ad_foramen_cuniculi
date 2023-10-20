@@ -1,4 +1,5 @@
 mod game_map;
+mod game_tile;
 
 use crate::game_map::GameMap;
 
