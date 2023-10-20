@@ -21,7 +21,7 @@ impl GameMap {
             height,
             area,
             map,
-        }
+        };
     }
 
     pub fn alter_tile_at_coordinate(&mut self, x: i32, y: i32, value: char) -> &mut Self {

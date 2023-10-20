@@ -7,11 +7,7 @@ pub struct GameTile {
 
 impl GameTile {
     pub fn new(x: i32, y: i32, value: char) -> Self {
-        Self {
-            x,
-            y,
-            value,
-        }
+        Self { x, y, value }
     }
 
     pub fn get_x(&self) -> i32 {
