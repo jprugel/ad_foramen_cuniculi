@@ -15,7 +15,7 @@ impl GameMap {
     pub fn to_vec(&self) -> Vec<char> {
         let vec_size = self.area();
         let mut result: Vec<char> = vec!['%'; vec_size as usize];
-        for index in 0..result.len() as i32 {
+        for mut index in 0..vec_size {
             if index < self.width {
                 result[index as usize] = '#';
             }
