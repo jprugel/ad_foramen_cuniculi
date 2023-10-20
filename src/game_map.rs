@@ -15,21 +15,17 @@ impl GameMap {
     pub fn to_vec(&self) -> Vec<char> {
         let vec_size = self.area();
         let mut result: Vec<char> = vec!['%'; vec_size as usize];
-        for index in result {
-            if index < (self.width as usize) {
-                result[index] = '#';
-                continue;
+        for mut index in 0..vec_size {
+            if index < self.width {
+                result[index as usize] = '#';
             }
-            if index >= (self.area() - (self.width)) as usize {
-                result[index] = '#';
-                continue;
+            if index >= (self.area() - self.width) {
+                result[index as usize] = '#';
             }
-            if (index + 1) % (self.width as usize) == 0 || (index + 1) % (self.width as usize) == 1
-            {
-                result[index] = '#';
-                continue;
+            if (index + 1) % (self.width) == 0 || (index + 1) % (self.width) == 1 {
+                result[index as usize] = '#';
             }
-            result[index] = '%'
+            result[index as usize] = '%'
         }
         result
     }
