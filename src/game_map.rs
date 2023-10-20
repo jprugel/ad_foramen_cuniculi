@@ -34,4 +34,31 @@ impl GameMap {
         self.map[index].set_value(value);
         self
     }
+
+    pub fn initialize(&mut self) {
+        for (index, tile) in self.map.iter_mut().enumerate() {
+            if index < self.width as usize {
+                tile.set_value('#');
+            }
+            if (index + 1) % (self.width as usize) <= 1 {
+                tile.set_value('#');
+            }
+            if index > (self.area - self.width) as usize {
+                tile.set_value('#');
+            }
+        }
+    }
+
+    pub fn render(&self) {
+        for (index, tile) in self.map.iter().enumerate() {
+            let remainder = index % (self.width as usize);
+            let target = (self.width as usize) - 1;
+            if remainder == target {
+                print!("{}", tile.get_value());
+                println!();
+            } else {
+                print!("{}", tile.get_value());
+            }
+        }
+    }
 }

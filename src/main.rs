@@ -4,8 +4,9 @@ mod game_tile;
 use crate::game_map::GameMap;
 
 fn main() {
-    let map = GameMap::new(10, 20);
-    map.print();
+    let mut map = GameMap::new(10, 10);
+    map.initialize();
+    map.render();
 }
 
 fn clear_terminal() {
