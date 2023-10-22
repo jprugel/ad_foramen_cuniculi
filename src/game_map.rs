@@ -14,18 +14,18 @@ impl GameMap {
         for index in 0..area {
             let x: i32 = index % width;
             let y: i32 = index / width;
-            map.push(GameTile::new(x, y, '%'));
+            map.push(GameTile::new(x, y, '.'));
         }
-        return Self {
+        Self {
             width,
             height,
             area,
             map,
-        };
+        }
     }
 
     pub fn alter_tile_at_coordinate(&mut self, x: i32, y: i32, value: char) -> &mut Self {
-        let index: usize = (y * self.width * x) as usize;
+        let index: usize = (y * self.width + x) as usize;
         self.map[index].set_value(value);
         self
     }
