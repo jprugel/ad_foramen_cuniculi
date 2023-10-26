@@ -1,27 +1,22 @@
-mod game_map;
-mod game_tile;
-mod player;
+use recs::{System};
+use crate::recs::Component;
 
-use crate::game_map::GameMap;
-use crate::player::Player;
-
-use std::io;
+mod recs;
+mod rterm;
 
 fn main() {
-    let mut map = GameMap::new(30, 10);
-    let mut player: Player = Player::new('@', (3, 3));
-    map.initialize();
-    map.render();
-    map.alter_tile_at_coordinate(
-        player.get_position().0,
-        player.get_position().1,
-        player.get_icon(),
-    );
-    clear_terminal();
-    map.render();
+    let mut world = System::default();
+    let mut _player = world.create_entity()
+        .set_id(30)
+        .set_name("Player")
+        .add_component::<Transform>(Transform {x: 1, y: 1} )
+        .build();
 }
 
-fn clear_terminal() {
-    // ANSI escape code to clear the screen
-    print!("\x1B[2J\x1B[1;1H"); // This code clears the screen and positions the cursor at (1, 1)
+#[derive(Debug)]
+struct Transform {
+    x: i32,
+    y: i32,
 }
+
+impl Component for Transform {}
