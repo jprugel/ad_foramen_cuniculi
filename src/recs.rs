@@ -15,7 +15,7 @@ pub struct EntityBuilder {
 }
 impl EntityBuilder {
     pub fn set_id(mut self, id: EntityId) -> Self {
-        self.id =  Some(id);
+        self.id = Some(id);
         self
     }
 
@@ -33,7 +33,7 @@ impl EntityBuilder {
                     .as_mut()
                     .unwrap()
                     .insert(component.type_id(), Box::new(component))
-            },
+            }
         };
         self
     }
@@ -44,7 +44,7 @@ impl EntityBuilder {
             None => {
                 println!("Please give an id to the entity!");
                 0
-            },
+            }
         };
 
         let name = match self.name {
@@ -63,11 +63,13 @@ impl EntityBuilder {
             components,
         }
     }
-
 }
 // Component ---------------------------------------------------------------------------------------
 pub trait Component {
-    fn as_any(&self) -> &dyn Any where Self: Sized + 'static {
+    fn as_any(&self) -> &dyn Any
+    where
+        Self: Sized + 'static,
+    {
         self as &dyn Any
     }
 }
