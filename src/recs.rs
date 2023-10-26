@@ -6,6 +6,12 @@ pub struct Entity {
     name: String,
     components: HashMap<TypeId, Box<dyn Component>>,
 }
+impl Entity {
+    pub fn get_component<T: Component>(&self) -> Option<&T> {
+        let boxed = self.components.get(&TypeId::of::<T>())?;
+        boxed.as_any().downcast_ref::<T>()
+    }
+}
 // Entity Builder ----------------------------------------------------------------------------------
 #[derive(Default)]
 pub struct EntityBuilder {
@@ -65,12 +71,9 @@ impl EntityBuilder {
     }
 }
 // Component ---------------------------------------------------------------------------------------
-pub trait Component {
-    fn as_any(&self) -> &dyn Any
-    where
-        Self: Sized + 'static,
-    {
-        self as &dyn Any
+pub trait Component: Any {
+    fn as_any(&self) -> &dyn Any where Self: 'static {
+        &self as &dyn Any
     }
 }
 // System ------------------------------------------------------------------------------------------
