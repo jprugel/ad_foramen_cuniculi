@@ -1,25 +1,18 @@
-use crate::recs::Component;
-use recs::System;
-use std::any::TypeId;
+extern crate rltk;
+use rltk::{Rltk, GameState, Console, RltkBuilder};
 
-mod recs;
-mod rterm;
-
-fn main() {
-    let mut world = System::default();
-    let mut player = world
-        .create_entity()
-        .set_id(30)
-        .set_name("Player")
-        .add_component::<Transform>(Transform { x: 1, y: 1 })
-        .build();
-    let mut transform = player.get_component::<Transform>();
+struct State {}
+impl GameState for State {
+    fn tick(&mut self, ctx : &mut Rltk) {
+        ctx.cls();
+        ctx.print(1, 1, "Hello RLTK World");
+    }
 }
 
-#[derive(Debug)]
-struct Transform {
-    x: i32,
-    y: i32,
+fn main() -> rltk::BError {
+    let context = RltkBuilder::simple80x50()
+        .with_title("Ad Foramen Cuniculi")
+        .build()?;
+    let gs = State{ };
+    rltk::main_loop(context, gs)
 }
-
-impl Component for Transform {}
